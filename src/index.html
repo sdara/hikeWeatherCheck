@@ -10,11 +10,11 @@
 	<body>
 		<div id="parameters">
 			<div>Search Area: <input type="text" id="searchArea" value="" /></div>
-			<div>Min Temp: <input type="text" value="" /></div>
-			<div>Max Temp: <input type="text" value="" /></div>
-			<div>Min Humidity: <input type="text" value="" /></div>
-			<div>Max Humidity: <input type="text" value="" /></div>
-			<div><input type="button" data-searchType="weather" value="Today" /> <input type="button" data-searchType="forecast"  value="Five Day" /></div>
+			<div>temp_min: <input type="text" id="tempMin" value="60" /></div>
+			<div>temp_max: <input type="text" id="tempMax" value="90" /></div>
+			<div>humidity_min: <input type="text" id="humidityMin" value="0" /></div>
+			<div>humidity_max: <input type="text" id="humidityMax" value="50" /></div>
+			<div><input type="button" data-searchType="weather" value="Today" /> <input type="button" data-searchType="forecast"  value="Forecast" /></div>
 		</div>
 		<div id="output"></div>
 	</body>
