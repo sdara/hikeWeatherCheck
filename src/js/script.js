@@ -17,41 +17,37 @@ $( document ).ready( function() {
 				cache: false,
 				dataType: 'json',
 				success: function( result ) {
-					var i, l, j, extra, val, weatherNow, str = '';
+					var i, l, j, extra, val, weatherNow, list = [], str = '';
 					
 					if( searchType === 'weather' ) {
 						if( result.main ) {
-							for( i in result.main ) {
-								extra = '';
-								val = parseInt( result.main[ i ] );
-								if( 
-									( i === 'temp' && val >= tempMin && val <= tempMax )
-									|| ( i === 'humidity' && val >= humidityMin && val <= humidityMax ) 
-								) {
-									extra = '<span class="green bold">MATCH</span>';
-								}
-								
-								str += '<div>' + i + ' => ' + val + ' ' + extra + '</div>';
-							}
+							result.dt_txt = ( function() { var d = new Date(); return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds(); }() );
+							list.push( result );
 						}
 					} else if( searchType === 'forecast' ) {
 						if( result.list ) {
-							for( j = 0, l = result.list.length; j < l; j += 1 ) {
-								if( result.list[ j ].main ) {
-									weatherNow = result.list[ j ].weather[ 0 ];
-									str += '<hr />' + result.list[ j ].dt_txt + ' : ' + weatherNow.main + ' - ' + weatherNow.description;
-									for( i in result.list[ j ].main ) {
-										extra = '';
-										val = parseInt( result.list[ j ].main[ i ] );
-										if( 
-											( i === 'temp' && val >= tempMin && val <= tempMax )
-											|| ( i === 'humidity' && val >= humidityMin && val <= humidityMax ) 
-										) {
-											extra = '<span class="green bold">MATCH</span>';
-										}
-										
-										str += '<div>' + i + ' => ' + val + ' ' + extra + '</div>';
+							list = result.list;
+						}
+					}
+					console.log( 'list', list );
+					console.log( 'list.length', list.length );
+					
+					if( list.length > 0  ) {
+						for( j = 0, l = list.length; j < l; j += 1 ) {
+							if( list[ j ].main ) {
+								weatherNow = list[ j ].weather[ 0 ];
+								str += '<hr />' + list[ j ].dt_txt + ' : ' + weatherNow.main + ' - ' + weatherNow.description;
+								for( i in list[ j ].main ) {
+									extra = '';
+									val = parseInt( list[ j ].main[ i ] );
+									if( 
+										( i === 'temp' && val >= tempMin && val <= tempMax )
+										|| ( i === 'humidity' && val >= humidityMin && val <= humidityMax ) 
+									) {
+										extra = '<span class="green bold">MATCH</span>';
 									}
+									
+									str += '<div>' + i + ' => ' + val + ' ' + extra + '</div>';
 								}
 							}
 						}
