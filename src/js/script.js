@@ -1,4 +1,6 @@
 $( document ).ready( function() {
+	$( '#searchArea' ).val( CONFIG.SEARCHAREA );
+	
 	$( 'input[type=button]' ).click( function() {
 		var searchType = $( this ).attr( 'data-searchType' ) || '';
 		var searchArea = $.trim( $( '#searchArea' ).val() );
