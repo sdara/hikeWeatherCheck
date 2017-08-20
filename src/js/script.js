@@ -29,8 +29,6 @@ $( document ).ready( function() {
 							list = result.list;
 						}
 					}
-					console.log( 'list', list );
-					console.log( 'list.length', list.length );
 					
 					if( list.length > 0  ) {
 						for( j = 0, l = list.length; j < l; j += 1 ) {
